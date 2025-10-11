@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@antfu/ni": "^26.0.1",
+    "@henrygd/queue": "^1.0.7",
     "cac": "^6.7.14",
     "find-up-simple": "^1.0.1",
     "ofetch": "^1.4.1",
@@ -67,7 +68,6 @@
     "fast-npm-meta": "^0.4.6",
     "npm-package-arg": "^13.0.0",
     "npm-registry-fetch": "^19.0.0",
-    "p-limit": "^7.1.1",
     "semver": "^7.7.2",
     "taze": "workspace:*",
     "tsx": "^4.20.5",

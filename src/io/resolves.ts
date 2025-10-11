@@ -2,8 +2,8 @@ import type { CheckOptions, DependencyFilter, DependencyResolvedCallback, DiffTy
 import { existsSync, promises as fs, lstatSync } from 'node:fs'
 import os from 'node:os'
 import process from 'node:process'
+import { newQueue } from '@henrygd/queue'
 import _debug from 'debug'
-import pLimit from 'p-limit'
 import { resolve } from 'pathe'
 import semver from 'semver'
 import { diffSorter } from '../filters/diff-sorter'
@@ -326,10 +326,10 @@ export async function resolveDependencies(
     concurrency = 10,
   } = options
 
-  const limit = pLimit(concurrency)
+  const limit = newQueue(concurrency)
 
   return Promise.all(
-    deps.map(raw => limit(async () => {
+    deps.map(raw => limit.add(async () => {
       const dep = await resolveDependency(raw, options, filter)
       counter += 1
       progressCallback(raw.name, counter, total)
